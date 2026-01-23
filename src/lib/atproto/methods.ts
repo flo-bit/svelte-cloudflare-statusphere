@@ -118,7 +118,7 @@ export async function listRecords({
 		});
 
 		if (!response.ok) {
-			return;
+			return allRecords;
 		}
 
 		allRecords.push(...response.data.records);

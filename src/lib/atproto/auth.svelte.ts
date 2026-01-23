@@ -8,7 +8,6 @@ import {
 } from '@atcute/oauth-browser-client';
 import { AppBskyActorDefs } from '@atcute/bluesky';
 import type { ActorIdentifier, Did } from '@atcute/lexicons';
-
 import {
 	CompositeDidDocumentResolver,
 	CompositeHandleResolver,
@@ -18,13 +17,13 @@ import {
 	WebDidDocumentResolver,
 	WellKnownHandleResolver
 } from '@atcute/identity-resolver';
-
 import { Client } from '@atcute/client';
 
 import { dev } from '$app/environment';
-import { metadata } from './metadata';
 import { replaceState } from '$app/navigation';
-import { getDetailedProfile } from './atproto';
+
+import { metadata } from './metadata';
+import { getDetailedProfile } from './methods';
 import { signUpPDS } from './settings';
 
 export const user = $state({

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { user, logout } from '$lib/oauth';
+	import { user, logout } from '$lib/atproto';
 	import Avatar from '$lib/UI/Avatar.svelte';
 	import Button from '$lib/UI/Button.svelte';
 	import { loginModalState } from '$lib/UI/LoginModal.svelte';

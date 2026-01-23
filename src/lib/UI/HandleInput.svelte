@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { AppBskyActorDefs } from '@atcute/bluesky';
 	import { Combobox } from 'bits-ui';
-	import { searchActorsTypeahead } from '$lib/oauth/atproto';
+	import { searchActorsTypeahead } from '$lib/atproto';
 	import Avatar from './Avatar.svelte';
 
 	let results: AppBskyActorDefs.ProfileViewBasic[] = $state([]);

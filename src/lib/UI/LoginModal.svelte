@@ -7,7 +7,7 @@
 </script>
 
 <script lang="ts">
-	import { login, signup } from '$lib/oauth/auth.svelte';
+	import { login, signup } from '$lib/atproto';
 	import type { ActorIdentifier, Did } from '@atcute/lexicons';
 	import Button from './Button.svelte';
 	import { onMount, tick } from 'svelte';
