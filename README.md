@@ -1,5 +1,7 @@
 # svelte atproto client oauth demo
 
+try it here: http://flo-bit.dev/svelte-atproto-client-oauth/
+
 this is a scaffold for how to get client side oauth working with sveltekit and atproto 
 using the [`atcute`](https://github.com/mary-ext/atcute) libraries.
 
