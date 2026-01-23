@@ -1,3 +1,5 @@
+export const SITE = 'https://flo-bit.dev';
+
 export const collections: string[] = ['xyz.statusphere.status'];
 
 export const rpcCalls: Record<string, string | string[]> = {

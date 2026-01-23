@@ -1,5 +1,5 @@
 import { resolve } from '$app/paths';
-import { blobs, collections, rpcCalls } from './settings';
+import { blobs, collections, rpcCalls, SITE } from './settings';
 
 function constructScope() {
 	const repos = collections.map((collection) => 'repo:' + collection).join(' ');
@@ -20,13 +20,12 @@ function constructScope() {
 	}
 
 	const scope = ['atproto', repos, rpcs, blobScope].filter((v) => v?.trim()).join(' ');
-	console.log(scope);
 	return scope;
 }
 
 export const metadata = {
-	client_id: resolve('/oauth-client-metadata.json'),
-	redirect_uris: [resolve('/')],
+	client_id: SITE + resolve('/oauth-client-metadata.json'),
+	redirect_uris: [SITE + resolve('/')],
 	scope: constructScope(),
 	grant_types: ['authorization_code', 'refresh_token'],
 	response_types: ['code'],
