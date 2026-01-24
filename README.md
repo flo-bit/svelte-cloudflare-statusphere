@@ -43,7 +43,7 @@ const config = {
 
 ```svelte
 <script>
-	import { initClient } from '$lib/oauth';
+	import { initClient } from '$lib/atproto';
 
 	let { children } = $props();
 
@@ -114,7 +114,7 @@ Either use the `LoginModal` component to render a login modal or use the `user` 
 
 ```ts
 // handlin login flow yourself
-import { user } from '$lib/oauth';
+import { user } from '$lib/atproto';
 
 // methods:
 user.login(handle);
@@ -128,7 +128,7 @@ LoginModal is a component that renders a login modal, add it for a quick login f
 
 ```svelte
 <script>
-	import { LoginModal, loginModalState } from '$lib/oauth';
+	import { LoginModal, loginModalState } from '$lib/atproto';
 </script>
 
 <LoginModal />
@@ -141,7 +141,7 @@ LoginModal is a component that renders a login modal, add it for a quick login f
 Get the user's profile and make requests with the `user.client` object.
 
 ```ts
-import { user } from '$lib/oauth';
+import { user } from '$lib/atproto';
 
 // make requests with the user.client object
 // this example needs the getActorLikes rpc permission, set permissions

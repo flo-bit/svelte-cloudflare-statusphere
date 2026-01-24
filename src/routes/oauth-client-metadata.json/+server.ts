@@ -1,4 +1,4 @@
-import { metadata } from '$lib/oauth';
+import { metadata } from '$lib/atproto';
 import { json } from '@sveltejs/kit';
 
 export const prerender = true;
