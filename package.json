@@ -20,6 +20,7 @@
 		"@atcute/identity-resolver": "^1.2.2",
 		"@atcute/lexicons": "^1.2.6",
 		"@atcute/oauth-browser-client": "^2.0.3",
+		"@atcute/tid": "^1.1.1",
 		"@eslint/compat": "^2.0.1",
 		"@eslint/js": "^9.39.2",
 		"@sveltejs/adapter-auto": "^7.0.0",

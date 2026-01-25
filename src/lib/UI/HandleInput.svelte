@@ -57,13 +57,13 @@
 			value = e.currentTarget.value;
 			search(e.currentTarget.value);
 		}}
-		class="w-full touch-none rounded-full border-0 bg-white ring-0 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-accent-600 dark:bg-white/5 dark:outline-white/10 dark:focus-within:outline-accent-500"
+		class="w-full touch-none rounded-full border-0 bg-white ring-0 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-accent-600 dark:bg-white/5 dark:outline-white/10 dark:focus-within:outline-accent-500 dark:placeholder:text-base-400"
 		placeholder="handle"
 		id=""
 		aria-label="enter your handle"
 	/>
 	<Combobox.Content
-		class="z-100 max-h-[30dvh] w-full rounded-2xl border border-base-300 bg-base-50 shadow-lg"
+		class="z-100 max-h-[30dvh] w-full rounded-2xl border border-base-300 bg-base-50 dark:bg-base-900 dark:border-base-800 shadow-lg"
 		sideOffset={10}
 		align="start"
 		side="top"
@@ -71,7 +71,7 @@
 		<Combobox.Viewport class="w-full p-1">
 			{#each results as actor (actor.did)}
 				<Combobox.Item
-					class="rounded-button my-0.5 flex w-full cursor-pointer items-center gap-2 rounded-xl p-2 px-2 data-highlighted:bg-accent-100"
+					class="rounded-button my-0.5 flex w-full cursor-pointer items-center gap-2 rounded-xl p-2 px-2 data-highlighted:bg-accent-100 dark:data-highlighted:bg-accent-600/30"
 					value={actor.handle}
 					label={actor.handle}
 				>

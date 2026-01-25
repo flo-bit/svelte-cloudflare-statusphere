@@ -16,7 +16,7 @@
 	import { AppBskyActorDefs } from '@atcute/bluesky';
 	import Avatar from './Avatar.svelte';
 
-	let { signUp = true, loginOnSelect = true }: { signUp?: boolean; loginOnSelect?: boolean } =
+	let { signUp = true, loginOnSelect = false }: { signUp?: boolean; loginOnSelect?: boolean } =
 		$props();
 
 	let value = $state('');
@@ -41,6 +41,7 @@
 	}
 
 	let input: HTMLInputElement | null = $state(null);
+	let submitButton: HTMLButtonElement | null = $state(null);
 
 	$effect(() => {
 		if (!loginModalState.visible) {
@@ -49,11 +50,20 @@
 			loadingLogin = false;
 			selectedActor = undefined;
 		} else {
-			tick().then(() => {
-				input?.focus();
-			});
+			focusInput();
 		}
 	});
+
+	function focusInput() {
+		tick().then(() => {
+			input?.focus();
+		});
+	}
+	function focusSubmit() {
+		tick().then(() => {
+			submitButton?.focus();
+		});
+	}
 
 	let selectedActor: AppBskyActorDefs.ProfileViewBasic | undefined = $state();
 
@@ -104,7 +114,9 @@
 						Login with your internet handle
 					</h3>
 
-					<div class="text-base-800 mt-2 mb-2 text-xs font-light">e.g. your bluesky account</div>
+					<div class="text-base-800 dark:text-base-200 mt-2 mb-2 text-xs font-light">
+						e.g. your bluesky account
+					</div>
 
 					<form onsubmit={onSubmit} class="mt-2 flex w-full flex-col gap-2">
 						{#if showRecentLogins}
@@ -113,10 +125,10 @@
 								{#each Object.values(recentLogins).slice(0, 4) as recentLogin}
 									<div class="group">
 										<div
-											class="group-hover:bg-base-300 bg-base-200 border-base-300 relative flex h-10 w-full items-center justify-between gap-2 rounded-full border px-2 font-semibold transition-colors duration-100"
+											class="group-hover:bg-base-300 bg-base-200 dark:bg-base-700 dark:hover:bg-base-600 dark:border-base-500/50 border-base-300 relative flex h-10 w-full items-center justify-between gap-2 rounded-full border px-2 font-semibold transition-colors duration-100"
 										>
 											<div class="flex items-center gap-2">
-												<Avatar src={recentLogin.avatar} />
+												<Avatar class="size-6" src={recentLogin.avatar} />
 												{recentLogin.handle}
 											</div>
 											<button
@@ -124,7 +136,8 @@
 												onclick={() => {
 													value = recentLogin.handle;
 													selectedActor = recentLogin;
-													onSubmit();
+													if (loginOnSelect) onSubmit();
+													else focusSubmit();
 												}}
 											>
 												<div class="absolute inset-0 h-full w-full"></div>
@@ -165,16 +178,17 @@
 										selectedActor = a;
 										value = a.handle;
 										if (loginOnSelect) onSubmit();
+										else focusSubmit();
 									}}
 									bind:ref={input}
 								/>
 							</div>
 						{:else}
 							<div
-								class="bg-base-200 border-base-300 mt-4 flex h-10 w-full items-center justify-between gap-2 rounded-full border px-2 font-semibold"
+								class="bg-base-200 dark:bg-base-700 border-base-300 dark:border-base-600 mt-4 flex h-10 w-full items-center justify-between gap-2 rounded-full border px-2 font-semibold"
 							>
 								<div class="flex items-center gap-2">
-									<Avatar src={selectedActor.avatar} />
+									<Avatar class="size-6" src={selectedActor.avatar} />
 									{selectedActor.handle}
 								</div>
 
@@ -211,18 +225,21 @@
 								<Button
 									onclick={() => {
 										recentLoginsView = false;
+										focusInput();
 									}}
 									class="w-full">Login with new handle</Button
 								>
 							{:else}
-								<Button type="submit" disabled={loadingLogin} class="w-full"
+								<Button bind:ref={submitButton} type="submit" disabled={loadingLogin} class="w-full"
 									>{loadingLogin ? 'Loading...' : 'Login'}</Button
 								>
 							{/if}
 						</div>
 
 						{#if signUp}
-							<div class="border-base-200 text-base-800 mt-4 border-t pt-4 text-sm leading-7">
+							<div
+								class="border-base-200 dark:border-base-700 text-base-800 dark:text-base-200 mt-4 border-t pt-4 text-sm leading-7"
+							>
 								Don't have an account?
 								<div class="mt-3">
 									<SecondaryButton

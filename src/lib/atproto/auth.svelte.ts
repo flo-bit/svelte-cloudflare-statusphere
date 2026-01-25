@@ -24,6 +24,7 @@ import { replaceState } from '$app/navigation';
 import { metadata } from './metadata';
 import { getDetailedProfile } from './methods';
 import { signUpPDS } from './settings';
+import { SvelteURLSearchParams } from 'svelte/reactivity';
 
 import type { ActorIdentifier, Did } from '@atcute/lexicons';
 
@@ -68,7 +69,7 @@ export async function initClient() {
 		})
 	});
 
-	const params = new URLSearchParams(location.hash.slice(1));
+	const params = new SvelteURLSearchParams(location.hash.slice(1));
 
 	const did = (localStorage.getItem('current-login') as Did) ?? undefined;
 
@@ -151,7 +152,7 @@ export async function logout() {
 	}
 }
 
-async function finalizeLogin(params: URLSearchParams, did?: Did) {
+async function finalizeLogin(params: SvelteURLSearchParams, did?: Did) {
 	try {
 		const { session } = await finalizeAuthorization(params);
 		replaceState(location.pathname + location.search, {});

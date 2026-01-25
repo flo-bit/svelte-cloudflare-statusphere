@@ -16,7 +16,7 @@
 	<a
 		href="https://github.com/flo-bit/svelte-atproto-client-oauth"
 		target="_blank"
-		class="mt-2 text-sm text-rose-600">source code</a
+		class="mt-2 text-sm text-rose-600 dark:text-accent-500">source code</a
 	>
 
 	{#if user.isInitializing}
