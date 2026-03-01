@@ -9,89 +9,9 @@ pnpm install
 pnpm dev
 ```
 
-In dev mode the app uses a **loopback OAuth client** (no keys, in-memory storage). It binds to `127.0.0.1:5183` — required for AT Protocol loopback OAuth.
+Dev mode uses a loopback OAuth client — no keys or Cloudflare setup needed. Open http://127.0.0.1:5183 and log in with any Bluesky handle.
 
-### Dev with tunnel (confidential client)
-
-To test the full production flow locally with a tunnel like [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/):
-
-```sh
-pnpm env:setup-dev                              # generates secrets in .env
-# add OAUTH_PUBLIC_URL=https://your-tunnel.trycloudflare.com to .env
-cloudflared tunnel --url http://localhost:5183   # start tunnel
-pnpm dev                                        # start dev server
-```
-
-## Production Deployment
-
-### 1. Create KV namespaces
-
-```sh
-npx wrangler kv namespace create OAUTH_SESSIONS
-npx wrangler kv namespace create OAUTH_STATES
-```
-
-Add the IDs to `wrangler.jsonc`:
-
-```jsonc
-"kv_namespaces": [
-  { "binding": "OAUTH_SESSIONS", "id": "<your-id>" },
-  { "binding": "OAUTH_STATES", "id": "<your-id>" }
-]
-```
-
-### 2. Set your public URL
-
-In `wrangler.jsonc`:
-
-```jsonc
-"vars": {
-  "OAUTH_PUBLIC_URL": "https://your-domain.com"
-}
-```
-
-### 3. Generate and set secrets
-
-```sh
-pnpm env:generate-key
-npx wrangler secret put CLIENT_ASSERTION_KEY    # paste generated key
-
-pnpm env:generate-secret
-npx wrangler secret put COOKIE_SECRET           # paste generated secret
-```
-
-### 4. Configure permissions
-
-Edit `src/lib/atproto/settings.ts`:
-
-```ts
-export const permissions = {
-  collections: ['xyz.statusphere.status'],  // collections your app can read/write
-  rpc: {},                                   // authenticated RPC requests
-  blobs: []                                  // blob types your app can upload
-} as const;
-```
-
-The OAuth scope is auto-generated from this config.
-
-### 5. Deploy
-
-```sh
-npx wrangler deploy
-```
-
-Set up a custom domain in the Cloudflare dashboard (Worker > Settings > Domains & Routes) so the OAuth client metadata URL matches your `client_id`.
-
-## Scripts
-
-| Script | Description |
-|---|---|
-| `pnpm dev` | Start dev server |
-| `pnpm build` | Build for production |
-| `pnpm check` | Run svelte-check |
-| `pnpm env:generate-key` | Generate client assertion key |
-| `pnpm env:generate-secret` | Generate cookie signing secret |
-| `pnpm env:setup-dev` | Generate both and write to `.env` |
+See [GETTING_STARTED.md](GETTING_STARTED.md) for production deployment, tunnel setup, and configuration.
 
 ## Adding to an existing project
 
@@ -101,7 +21,7 @@ Set up a custom domain in the Cloudflare dashboard (Worker > Settings > Domains 
 add atproto oauth to this project https://raw.githubusercontent.com/flo-bit/svelte-atproto-oauth-cloudflare-workers/main/AGENT_SETUP.md
 ```
 
-The [agent prompt](AGENT_SETUP.md) will ask you a few questions and set everything up.
+The [agent prompt](AGENT_SETUP.md) asks a few questions and sets everything up.
 
 **Manually** — see [SETUP.md](SETUP.md) for a step-by-step guide.
 
