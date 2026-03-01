@@ -17,7 +17,7 @@
 	<h1 class="text-3xl font-bold">svelte atproto cloudflare workers oauth demo</h1>
 
 	<a
-		href="https://github.com/flo-bit/svelte-atproto-client-oauth"
+		href="https://github.com/flo-bit/atproto-oauth-cloudflare"
 		target="_blank"
 		class="dark:text-accent-500 mt-2 text-sm text-rose-600">source code</a
 	>
