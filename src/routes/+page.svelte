@@ -97,7 +97,7 @@
 <div class="mx-auto max-w-xl px-4 my-16">
 	<h1 class="mb-4 text-3xl font-bold">svelte + cloudflare workers statusphere</h1>
 
-	<GithubCorner href="https://github.com/flo-bit/atproto-oauth-cloudflare" />
+	<GithubCorner href="https://github.com/flo-bit/svelte-cloudflare-statusphere" />
 
 	{#if !user.isLoggedIn}
 		<Button class="my-4" size="lg" onclick={() => atProtoLoginModalState.show()}
