@@ -5,13 +5,14 @@
 	import { SvelteSet } from 'svelte/reactivity';
 	import { user, logout } from '$lib/atproto';
 	import { Button } from '@foxui/core';
-	import { atProtoLoginModalState, GithubCorner, PopoverEmojiPicker } from '@foxui/social';
+	import { GithubCorner, PopoverEmojiPicker } from '@foxui/social';
 	import { RelativeTime } from '@foxui/time';
 	import { JetstreamSubscription } from '@atcute/jetstream';
 
 	import { createTID, getDetailedProfile } from '$lib/atproto/methods';
 	import { putRecord } from '$lib/atproto/server/repo.remote';
 	import { emojiToNotoAnimatedWebp } from '$lib/emojis';
+	import { atProtoLoginModalState } from '$lib/atproto/ui/LoginModal.svelte';
 
 	let { data } = $props();
 
@@ -100,7 +101,7 @@
 	<GithubCorner href="https://github.com/flo-bit/svelte-cloudflare-statusphere" />
 
 	{#if !user.isLoggedIn}
-		<Button class="my-4" size="lg" onclick={() => atProtoLoginModalState.show()}
+		<Button class="my-4" size="lg" onclick={() => atProtoLoginModalState.open = true}
 			>Login to post a status</Button
 		>
 	{:else}

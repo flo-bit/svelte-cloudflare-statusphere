@@ -3,22 +3,14 @@
 	import { AtprotoLoginModal } from '@foxui/social';
 	import { login, signup } from '$lib/atproto';
 	import { Head, ThemeToggle } from '@foxui/core';
+	import LoginModal from '$lib/atproto/ui/LoginModal.svelte';
 
 	let { children } = $props();
 </script>
 
 {@render children()}
 
-<AtprotoLoginModal
-	login={async (handle) => {
-		await login(handle);
-		return true;
-	}}
-	signup={async () => {
-		signup();
-		return true;
-	}}
-/>
+<LoginModal />
 
 <ThemeToggle class="absolute top-2 left-2" />
 
